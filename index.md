@@ -32,17 +32,35 @@ URL, the listing ID, a price, an identifier, or anything about you.
 
 | Service | Operator | What is sent |
 |---|---|---|
-| QLever OSM (`qlever.dev`) | University of Freiburg | A coordinate, rounded to about 1 km |
-| Overpass API (`overpass-api.de`, `overpass.private.coffee`) | OpenStreetMap community | A coordinate, rounded to about 1 km |
-| Overpass API fallback (`maps.mail.ru`) — see below | VK (Russia) | A coordinate, rounded to about 1 km |
-| Open-Meteo Air Quality (`air-quality-api.open-meteo.com`) | Open-Meteo | A coordinate, rounded to about 1 km |
-| USGS Earthquake Catalog (`earthquake.usgs.gov`) | U.S. Geological Survey | A coordinate, rounded to about 1 km |
-| Hellenic Cadastre (`services-eu1.arcgis.com`, `gis.ktimanet.gr`) | Ελληνικό Κτηματολόγιο | A listing coordinate; the map image request is made only when you open the aerial photo |
+| QLever OSM (`qlever.dev`) | University of Freiburg | The listing's coordinate |
+| Overpass API (`overpass-api.de`, `overpass.private.coffee`) | OpenStreetMap community | The listing's coordinate |
+| Overpass API fallback (`maps.mail.ru`) — see below | VK (Russia) | The listing's coordinate |
+| Open-Meteo Air Quality (`air-quality-api.open-meteo.com`) | Open-Meteo | A coordinate rounded to about 1 km |
+| USGS Earthquake Catalog (`earthquake.usgs.gov`) | U.S. Geological Survey | A coordinate rounded to about 1 km |
+| Hellenic Cadastre (`services-eu1.arcgis.com`, `gis.ktimanet.gr`) | Ελληνικό Κτηματολόγιο | The listing's coordinate; the map image request is made only when you open the aerial photo |
 
 Amenities, transport and administrative areas are looked up on QLever first;
 the Overpass servers cover terrain (coast, forest, roads) and stand in for
-QLever when it is slow. Both receive the same rounded coordinate and nothing
-else.
+QLever when it is slow. Both receive the same coordinate and nothing else.
+
+### How precise is "the listing's coordinate"?
+
+It is the position the listing itself publishes, and for most listings that is
+already an approximate one: the site offsets the pin by roughly 300–500 m, and
+the panel labels those listings "approximate". Some listings publish an exact
+pin, and for those the coordinate is the building.
+
+Two of the services above receive **less** than that. Air quality is read from a
+roughly 11 km climate grid and seismicity is a count within a 100 km radius, so
+neither answer changes if the point moves a kilometre — the extension rounds the
+coordinate to about 1 km before sending it to them, because it costs nothing.
+
+The others cannot be coarsened without making the answer wrong: a walking time
+is not a walking time if the starting point moved 700 m, and the cadastre parcel
+is a specific piece of ground. Those services receive the coordinate as
+published. An earlier version of this page said every service got a rounded
+coordinate; that was not true of the amenity and cadastre lookups, and saying so
+plainly is better than a comforting sentence the code did not honour.
 
 These are third-party services with their own privacy practices, and each will
 see your IP address as any website you visit does. The extension sends them no
@@ -58,10 +76,20 @@ full-planet Overpass instance there is, and it is run by VK, a Russian company.
 It is a **last resort, not a mirror in rotation**. A request goes there only
 after the community servers have been tried and failed within the same request,
 which is the difference between a panel that works and one that shows nothing.
-What it receives is the same as what the others receive: a coordinate rounded to
-about 1 km, and nothing else — no listing, no identifier, no account. If you
+What it receives is the same as what the other Overpass servers receive: the
+listing's coordinate as described above, and nothing else — no listing, no
+identifier, no account. If you
 would rather that never happen, turn the extension off on the listings you do
 not want looked up; there is no partial mode.
+
+### Look-ahead on search-results pages
+
+On a results page the extension may look up the surroundings of a listing you
+have not opened yet, so the panel is already filled in if you click it. It is
+the same request with the same coordinate and nothing else, it is capped at one
+area per page, and it yields to real requests — but it does mean a coordinate
+can be sent for a listing you only scrolled past. Turning the extension off
+stops it.
 
 Listed buildings, traditional settlements and Greek regional statistics are
 **bundled inside the extension**, so looking them up sends no request at all.
@@ -80,9 +108,9 @@ Listed buildings, traditional settlements and Greek regional statistics are
 
 - **storage** — to keep your settings and the local cache described above
 - **declarativeNetRequest** — to set a descriptive `User-Agent` (and `Referer`)
-  on requests to the OpenStreetMap Overpass and QLever hosts, which their usage
-  policies ask clients to do so they can be identified. It is used for nothing
-  else and applies only to those hosts.
+  on requests to the four OpenStreetMap Overpass and QLever hosts, whose usage
+  policies ask clients to identify themselves. It is used for nothing else and
+  applies only to those hosts.
 - **Host permissions** — one entry per public data service listed above, so the
   extension can query it. No wildcard or all-sites access is requested.
 
