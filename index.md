@@ -1,10 +1,10 @@
 # PropertyFacts — Privacy Policy
 
-Last updated: 31 July 2026
+Last updated: 24 September 2026
 
 PropertyFacts is a browser extension that adds public property data to listings
-on spitogatos.gr. It is not affiliated with, authorised by, or endorsed by
-Spitogatos.
+on spitogatos.gr and xe.gr. It is not affiliated with, authorised by, or endorsed by
+Spitogatos or xe.gr.
 
 ## The short version
 
@@ -19,8 +19,11 @@ All extension data lives in `chrome.storage.local` on your device. The extension
 | Your settings (on/off, language, light/dark) | To remember your choices | Until you change or uninstall |
 | Cached public data about map areas (amenities, transport, administrative areas, air quality, seismic history, land registry, forest map) | Avoid repeat requests for the same area | 30-180 days by source; oldest entries are dropped when cache storage exceeds 6 MB |
 | Optional zone value entered by you | Remember the value for that neighbourhood when calculating the ENFIA estimate | Until you change it or uninstall |
+| Compare list (up to 5 listings you added: title, link, photo, and the listing and area details shown in the panel) | Show them side by side on the compare page | Until you remove them or uninstall |
+| Price history (listing ID, asking price each time it changed, first and last time you viewed it) | Show whether a listing you viewed before has changed price | Up to 500 listings, least recently viewed dropped first; until uninstall |
+| Which site and language you last used | Word the compare page to match | Until overwritten or uninstall |
 
-The current release does not create price history records.
+Price history is built only from listings you open yourself; nothing is fetched to create it and it is never sent anywhere.
 
 **You can clear cached public-data results at any time** from the extension toolbar popup ("Clear cached data"). Settings and optional zone values remain until you change them or remove the extension; removing the extension deletes all extension data.
 
@@ -100,8 +103,8 @@ Listed buildings, traditional settlements and Greek regional statistics are
 - No analytics, telemetry, crash reporting, or advertising
 - No selling, sharing, or transfer of user data to anyone — there is nobody to
   transfer it to
-- No tracking across sites; it runs only on spitogatos.gr pages
-- No reading or altering of the Spitogatos page beyond adding its own panel
+- No tracking across sites; it runs only on spitogatos.gr and xe.gr pages
+- No reading or altering of those pages beyond reading the listing details and adding its own panel
 - No remotely hosted code
 
 ## Permissions, and why each is needed
