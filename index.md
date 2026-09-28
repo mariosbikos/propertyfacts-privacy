@@ -93,14 +93,14 @@ identifier, no account. If you
 would rather that never happen, turn the extension off on the listings you do
 not want looked up; there is no partial mode.
 
-### Look-ahead on search-results pages
+### Listing pages only
 
-On a results page the extension may look up the surroundings of a listing you
-have not opened yet, so the panel is already filled in if you click it. It is
-the same request with the same coordinate and nothing else, it is capped at one
-area per page, and it yields to real requests — but it does mean a coordinate
-can be sent for a listing you only scrolled past. Turning the extension off
-stops it.
+The extension looks anything up only on a listing page you have actually
+opened (a spitogatos.gr or xe.gr property page, or a Rightmove
+`/properties/` page), never on a search-results page. An earlier version
+looked ahead on results pages to fill the panel before you clicked through;
+that has been removed, so no coordinate is sent for a listing you only
+scrolled past.
 
 Listed buildings, traditional settlements, Greek regional statistics, UK council
 tax rates, UK average rents and the UK crime scale are **bundled inside the
