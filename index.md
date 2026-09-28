@@ -1,10 +1,10 @@
 # PropertyFacts — Privacy Policy
 
-Last updated: 24 September 2026
+Last updated: 28 September 2026
 
 PropertyFacts is a browser extension that adds public property data to listings
-on spitogatos.gr and xe.gr. It is not affiliated with, authorised by, or endorsed by
-Spitogatos or xe.gr.
+on spitogatos.gr, xe.gr and rightmove.co.uk. It is not affiliated with, authorised by, or endorsed by
+Spitogatos, xe.gr or Rightmove.
 
 ## The short version
 
@@ -36,7 +36,15 @@ URL, the listing ID, a price, an identifier, or anything about you.
 | Service | Operator | What is sent |
 |---|---|---|
 | QLever OSM (`qlever.dev`) | University of Freiburg | The listing's coordinate |
-| Overpass API (`overpass-api.de`, `overpass.private.coffee`) | OpenStreetMap community | The listing's coordinate |
+| UK only: police.uk (`data.police.uk`) | Home Office | The listing's coordinate |
+| UK only: postcodes.io (`api.postcodes.io`) | Ideal Postcodes | The listing's coordinate |
+| UK only: Environment Agency flood map (`services-eu1.arcgis.com`) | Environment Agency | The listing's coordinate |
+| UK only: Historic England (`services-eu1.arcgis.com`) | Historic England | The listing's coordinate |
+| UK only: ONS neighbourhood centres (`services1.arcgis.com`) and Nomis (`www.nomisweb.co.uk`) | Office for National Statistics | The listing's coordinate (ONS); neighbourhood codes, not the coordinate (Nomis) |
+| UK only: EPC register (`find-energy-certificate.service.gov.uk`) | Department for Energy Security and Net Zero | The listing's postcode and street name, not the coordinate |
+| UK only: UK House Price Index (`landregistry.data.gov.uk`) | HM Land Registry | The listing's local authority name, not the coordinate |
+| UK only: Esri World Imagery (`server.arcgisonline.com`) | Esri | The listing's coordinate, only when you open the aerial photo |
+| Overpass API (`overpass-api.de`, `overpass.private.coffee`, `overpass.openstreetmap.fr`) | OpenStreetMap community (OpenStreetMap France runs the last) | The listing's coordinate |
 | Overpass API fallback (`maps.mail.ru`) — see below | VK (Russia) | The listing's coordinate |
 | Open-Meteo Air Quality (`air-quality-api.open-meteo.com`) | Open-Meteo | A coordinate rounded to about 1 km |
 | USGS Earthquake Catalog (`earthquake.usgs.gov`) | U.S. Geological Survey | A coordinate rounded to about 1 km |
@@ -94,8 +102,9 @@ area per page, and it yields to real requests — but it does mean a coordinate
 can be sent for a listing you only scrolled past. Turning the extension off
 stops it.
 
-Listed buildings, traditional settlements and Greek regional statistics are
-**bundled inside the extension**, so looking them up sends no request at all.
+Listed buildings, traditional settlements, Greek regional statistics, UK council
+tax rates, UK average rents and the UK crime scale are **bundled inside the
+extension**, so looking them up sends no request at all.
 
 ## What the extension does not do
 
@@ -103,7 +112,7 @@ Listed buildings, traditional settlements and Greek regional statistics are
 - No analytics, telemetry, crash reporting, or advertising
 - No selling, sharing, or transfer of user data to anyone — there is nobody to
   transfer it to
-- No tracking across sites; it runs only on spitogatos.gr and xe.gr pages
+- No tracking across sites; it runs only on spitogatos.gr, xe.gr and rightmove.co.uk pages
 - No reading or altering of those pages beyond reading the listing details and adding its own panel
 - No remotely hosted code
 
@@ -111,7 +120,7 @@ Listed buildings, traditional settlements and Greek regional statistics are
 
 - **storage** — to keep your settings and the local cache described above
 - **declarativeNetRequest** — to set a descriptive `User-Agent` (and `Referer`)
-  on requests to the four OpenStreetMap Overpass and QLever hosts, whose usage
+  on requests to the OpenStreetMap Overpass and QLever hosts, whose usage
   policies ask clients to identify themselves. It is used for nothing else and
   applies only to those hosts.
 - **Host permissions** — one entry per public data service listed above, so the
